@@ -1,0 +1,236 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Budgets",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-budget",
+                        "then": [
+                          {
+                            "code": "await grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await datagrid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button"
+                },
+                {
+                  "colorScheme": "ColorScheme.Pastel",
+                  "name": "chart0",
+                  "series": [
+                    {
+                      "categoryProperty": "Category.name",
+                      "data": "${getBudgetsResult}",
+                      "title": "Budgets",
+                      "type": "Donut",
+                      "valueProperty": "amount"
+                    }
+                  ],
+                  "type": "chart",
+                  "visible": true
+                },
+                {
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "budget_id",
+                      "title": "Budget Id",
+                      "visible": false
+                    },
+                    {
+                      "filterProperty": "Category.name",
+                      "groupProperty": "Category.name",
+                      "property": "category_id",
+                      "sortProperty": "Category.name",
+                      "template": "${((PersonalFinance.Models.Sql.Budget)data).Category?.name}",
+                      "title": "Category"
+                    },
+                    {
+                      "property": "amount",
+                      "title": "Amount"
+                    }
+                  ],
+                  "data": "${getBudgetsResult}",
+                  "events": {
+                    "loadData": [],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "budget_id",
+                            "value": "${event.budget_id}"
+                          }
+                        ],
+                        "path": "edit-budget",
+                        "then": [
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "filterMode": "advanced",
+                  "itemType": "PersonalFinance.Models.Sql.Budget",
+                  "name": "grid0",
+                  "title": "",
+                  "type": "datagrid",
+                  "visible": false
+                },
+                {
+                  "columns": [
+                    {
+                      "property": "category_id",
+                      "title": "Category Id",
+                      "visible": false
+                    },
+                    {
+                      "format": "",
+                      "property": "budget_id",
+                      "title": "Budget Id",
+                      "type": "integer",
+                      "visible": false
+                    },
+                    {
+                      "property": "name",
+                      "title": "Name"
+                    },
+                    {
+                      "property": "budgeted",
+                      "title": "Budgeted"
+                    },
+                    {
+                      "property": "spent",
+                      "title": "Spent"
+                    },
+                    {
+                      "property": "spentPercent",
+                      "title": "Spent Percent"
+                    },
+                    {
+                      "property": "remaining",
+                      "title": "Remaining"
+                    },
+                    {
+                      "property": "remainingPercent",
+                      "title": "Remaining Percent"
+                    }
+                  ],
+                  "data": "${getSpendingThisMonthResult}",
+                  "events": {
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "budget_id",
+                            "value": "${event.budget_id}"
+                          }
+                        ],
+                        "path": "edit-budget",
+                        "then": [
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "itemType": "PersonalFinance.Models.Sql.SpendingThisMonth",
+                  "name": "datagrid0",
+                  "type": "datagrid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "sql.getBudgets",
+        "parameters": [
+          {
+            "name": "$expand",
+            "value": "Category"
+          }
+        ],
+        "then": [
+          {
+            "name": "getBudgetsResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Budget>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "sql.getSpendingThisMonths",
+        "parameters": [
+          {
+            "name": "$orderby",
+            "value": [
+              {
+                "direction": "desc",
+                "property": "budgeted"
+              }
+            ]
+          }
+        ],
+        "then": [
+          {
+            "name": "getSpendingThisMonthResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.SpendingThisMonth>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Budgets"
+}

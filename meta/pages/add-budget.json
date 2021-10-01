@@ -1,0 +1,229 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "category_id",
+                              "name": "category_idLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Category",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "allowFiltering": true,
+                              "data": "${getCategoriesResult}",
+                              "name": "category_id",
+                              "placeholder": "Choose Category",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "textProperty": "name",
+                              "type": "dropdown",
+                              "value": "${budget.category_id}",
+                              "valueProperty": "category_id",
+                              "valueType": "int"
+                            },
+                            {
+                              "component": "category_id",
+                              "defaultValue": "0",
+                              "name": "category_idRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "category_id is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "amount",
+                              "name": "amountLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Amount",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "format": "C",
+                              "name": "amount",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${budget.amount}",
+                              "valueType": "decimal"
+                            },
+                            {
+                              "component": "amount",
+                              "name": "amountRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "amount is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "buttonStyle": "primary",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "type": "button"
+                            },
+                            {
+                              "buttonStyle": "light",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              },
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "type": "button"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "data": "${budget}",
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Budget!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "sql.createBudget",
+                        "parameters": [
+                          {
+                            "name": "Budget",
+                            "value": "${budget}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "result": "${budget}",
+                            "type": "close-popup"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "PersonalFinance.Models.Sql.Budget",
+                  "name": "form0",
+                  "type": "template-form",
+                  "visible": "${budget != null}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "sql.getCategories",
+        "parameters": [
+          {
+            "name": "$orderby",
+            "value": [
+              {
+                "direction": "asc",
+                "property": "name"
+              }
+            ]
+          }
+        ],
+        "then": [
+          {
+            "name": "getCategoriesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Category>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "budget",
+        "type": "set",
+        "value": "new PersonalFinance.Models.Sql.Budget(){}",
+        "valueType": "PersonalFinance.Models.Sql.Budget"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Budget"
+}

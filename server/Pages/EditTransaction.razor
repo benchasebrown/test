@@ -1,0 +1,115 @@
+﻿@page "/edit-transaction/{transaction_id}"
+@layout MainLayout
+@inherits PersonalFinance.Pages.EditTransactionComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using PersonalFinance.Models.Sql
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@transaction" TItem="PersonalFinance.Models.Sql.Transaction" Visible="@(transaction != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="account_id" style="width: 100%" Text="Account">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getAccountsResult" Placeholder="Choose Account" style="width: 100%" TextProperty="name" @bind-Value="@(transaction.account_id)" ValueProperty="account_id" Name="Account_id">
+                </RadzenDropDown>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="date" style="width: 100%" Text="Date">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(transaction.date)" Name="Date">
+                </RadzenDatePicker>
+                <RadzenRequiredValidator Component="Date" style="position: absolute" Text="date is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="checkNumber" style="width: 100%" Text="Check Number">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="width: 100%" @bind-Value="@(transaction.checkNumber)" Name="CheckNumber">
+                </RadzenNumeric>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="category_id" style="width: 100%" Text="Category">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown AllowFiltering="true" Data="@getCategoriesResult" Placeholder="Choose Category" style="display: block; width: 100%" TextProperty="name" @bind-Value="@(transaction.category_id)" ValueProperty="category_id" Name="Category_id">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Category_id" DefaultValue="0" style="position: absolute" Text="category_id is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="payee_id" style="width: 100%" Text="Payee">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown AllowFiltering="true" Data="@getPayeesResult" Placeholder="Choose Payee" style="display: block; width: 100%" TextProperty="name" @bind-Value="@(transaction.payee_id)" ValueProperty="payee_id" Name="Payee_id">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Payee_id" DefaultValue="0" style="position: absolute" Text="payee_id is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="description" style="width: 100%" Text="Description">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="150" style="width: 100%" @bind-Value="@(transaction.description)" Name="Description">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="amount" style="width: 100%" Text="Amount">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="width: 100%" @bind-Value="@(transaction.amount)" Name="Amount">
+                </RadzenNumeric>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="status_id" style="width: 100%" Text="Status">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getStatusesResult" Placeholder="Choose Status" style="display: block; width: 100%" TextProperty="name" @bind-Value="@(transaction.status_id)" ValueProperty="status_id" Name="Status_id">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Status_id" DefaultValue="0" style="position: absolute" Text="status_id is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

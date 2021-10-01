@@ -1,0 +1,482 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Name",
+                              "component": "name",
+                              "name": "nameLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 50,
+                              "type": "textbox",
+                              "name": "name",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${bill.name}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "nameRequiredValidator",
+                              "component": "name",
+                              "text": "name is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Description",
+                              "component": "description",
+                              "name": "descriptionLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "type": "textbox",
+                              "name": "description",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "value": "${bill.description}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Payee",
+                              "component": "payee_id",
+                              "name": "payee_idLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getPayeesResult}",
+                              "textProperty": "name",
+                              "valueProperty": "payee_id",
+                              "placeholder": "Choose Payee",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "payee_id",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${bill.payee_id}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "payee_idRequiredValidator",
+                              "component": "payee_id",
+                              "text": "payee_id is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Category",
+                              "component": "category_id",
+                              "name": "category_idLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getCategoriesResult}",
+                              "textProperty": "name",
+                              "valueProperty": "category_id",
+                              "placeholder": "Choose Category",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "category_id",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${bill.category_id}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "category_idRequiredValidator",
+                              "component": "category_id",
+                              "text": "category_id is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Amount",
+                              "component": "amount",
+                              "name": "amountLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "decimal",
+                              "type": "numeric",
+                              "name": "amount",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${bill.amount}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "amountRequiredValidator",
+                              "component": "amount",
+                              "text": "amount is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Due",
+                              "component": "due",
+                              "name": "dueLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "DateTime",
+                              "dateFormat": "MM/dd/yyyy",
+                              "type": "datepicker",
+                              "name": "due",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "value": "${bill.due}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Status",
+                              "component": "status_id",
+                              "name": "status_idLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getStatusesResult}",
+                              "textProperty": "name",
+                              "valueProperty": "status_id",
+                              "placeholder": "Choose Status",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "status_id",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "value": "${bill.status_id}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update Bill",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "sql.updateBill",
+                        "parameters": [
+                          {
+                            "name": "bill_id",
+                            "value": "${parameters.bill_id}"
+                          },
+                          {
+                            "name": "Bill",
+                            "value": "${bill}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${bill}",
+                            "condition": ""
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "PersonalFinance.Models.Sql.Bill",
+                  "data": "${bill}",
+                  "visible": "${bill != null}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "sql.getBillBybill_id",
+        "parameters": [
+          {
+            "name": "bill_id",
+            "value": "${parameters.bill_id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "bill",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "PersonalFinance.Models.Sql.Bill"
+          }
+        ],
+        "error": [],
+        "type": "invoke"
+      },
+      {
+        "name": "sql.getPayees",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getPayeesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Payee>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "sql.getCategories",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCategoriesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Category>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "sql.getStatuses",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getStatusesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Status>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Bill",
+  "layout": "Main"
+}

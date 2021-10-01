@@ -1,0 +1,48 @@
+{
+  "dataSources": [
+    "sql"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "PersonalFinance",
+  "navigation": [
+    "Accounts",
+    "Bills",
+    "Categories",
+    "Payees",
+    "Transactions",
+    "Spending",
+    "Budgets"
+  ],
+  "pages": [
+    "Accounts",
+    "Add Account",
+    "Edit Account",
+    "Bills",
+    "Add Bill",
+    "Edit Bill",
+    "Categories",
+    "Add Category",
+    "Edit Category",
+    "Payees",
+    "Add Payee",
+    "Edit Payee",
+    "Transactions",
+    "Add Transaction",
+    "Edit Transaction",
+    "Spending",
+    "Budgets",
+    "Add Budget",
+    "Edit Budget"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": "Accounts",
+  "theme": "dark"
+}

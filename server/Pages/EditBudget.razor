@@ -1,0 +1,51 @@
+﻿@page "/edit-budget/{budget_id}"
+@layout MainLayout
+@inherits PersonalFinance.Pages.EditBudgetComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using PersonalFinance.Models.Sql
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@budget" TItem="PersonalFinance.Models.Sql.Budget" Visible="@(budget != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="category_id" style="width: 100%" Text="Category">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown AllowFiltering="true" Data="@getCategoriesResult" Placeholder="Choose Category" style="display: block; width: 100%" TextProperty="name" @bind-Value="@(budget.category_id)" ValueProperty="category_id" Name="Category_id">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="Category_id" DefaultValue="0" style="position: absolute" Text="category_id is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="amount" style="width: 100%" Text="Amount">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric Format="C" style="display: block; width: 100%" @bind-Value="@(budget.amount)" Name="Amount">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Amount" style="position: absolute" Text="amount is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

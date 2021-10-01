@@ -1,0 +1,64 @@
+﻿@page "/budgets"
+@layout MainLayout
+@inherits PersonalFinance.Pages.BudgetsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using PersonalFinance.Models.Sql
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Budgets">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenChart ColorScheme="ColorScheme.Pastel">
+          <ChildContent>
+            <RadzenDonutSeries CategoryProperty="Category.name" Data="@getBudgetsResult" Title="Budgets" ValueProperty="amount">
+            </RadzenDonutSeries>
+          </ChildContent>
+        </RadzenChart>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getBudgetsResult" FilterMode="FilterMode.Advanced" TItem="PersonalFinance.Models.Sql.Budget" Visible="false" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Budget" Property="budget_id" Title="Budget Id" Visible="false">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Budget" FilterProperty="Category.name" GroupProperty="Category.name" Property="category_id" SortProperty="Category.name" Title="Category">
+              <Template Context="data">
+              @(((PersonalFinance.Models.Sql.Budget)data).Category?.name)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Budget" Property="amount" Title="Amount">
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+        <RadzenDataGrid @ref="datagrid0" Data="@getSpendingThisMonthResult" TItem="PersonalFinance.Models.Sql.SpendingThisMonth" RowSelect="@Datagrid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SpendingThisMonth" Property="category_id" Title="Category Id" Visible="false">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SpendingThisMonth" Property="budget_id" Title="Budget Id" Visible="false">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SpendingThisMonth" Property="name" Title="Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SpendingThisMonth" Property="budgeted" Title="Budgeted">
+                <FooterTemplate>
+                  Total Budgeted: <b>@String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", getSpendingThisMonthResult.Sum(b => b.budgeted))</b>
+              </FooterTemplate>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SpendingThisMonth" Property="spent" Title="Spent">
+                <FooterTemplate>
+                  Total Spent: <b>@String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", getSpendingThisMonthResult.Sum(b => b.spent))</b>
+              </FooterTemplate>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SpendingThisMonth" Property="spentPercent" Title="Spent Percent">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SpendingThisMonth" Property="remaining" Title="Remaining">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SpendingThisMonth" Property="remainingPercent" Title="Remaining Percent">
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

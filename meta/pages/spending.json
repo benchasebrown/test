@@ -1,0 +1,81 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Spending",
+          "type": "heading"
+        },
+        {
+          "colorScheme": "ColorScheme.Pastel",
+          "name": "chart0",
+          "series": [
+            {
+              "categoryProperty": "name",
+              "data": "${getSummariesResult}",
+              "radius": 150,
+              "title": "Spending by Category",
+              "type": "Donut",
+              "valueProperty": "total"
+            }
+          ],
+          "style": {
+            "height": "345px"
+          },
+          "type": "chart",
+          "visible": true
+        },
+        {
+          "columns": [
+            {
+              "property": "name",
+              "title": "Name"
+            },
+            {
+              "property": "total",
+              "title": "Total"
+            }
+          ],
+          "data": "${getSummariesResult}",
+          "itemType": "PersonalFinance.Models.Sql.SummaryCategoriesThisMonth",
+          "name": "datagrid0",
+          "type": "datagrid"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "sql.getSummaryCategoriesThisMonths",
+        "parameters": [
+          {
+            "name": "$orderby",
+            "value": [
+              {
+                "direction": "asc",
+                "property": "total"
+              }
+            ]
+          }
+        ],
+        "then": [
+          {
+            "name": "getSummariesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.SummaryCategoriesThisMonth>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Spending"
+}

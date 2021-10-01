@@ -1,0 +1,542 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "account_id",
+                              "name": "account_idLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Account",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getAccountsResult}",
+                              "name": "account_id",
+                              "placeholder": "Choose Account",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "textProperty": "name",
+                              "type": "dropdown",
+                              "value": "${transaction.account_id}",
+                              "valueProperty": "account_id",
+                              "valueType": "int"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "date",
+                              "name": "dateLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Date",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "dateFormat": "MM/dd/yyyy",
+                              "name": "date",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "datepicker",
+                              "value": "${transaction.date}",
+                              "valueType": "DateTime"
+                            },
+                            {
+                              "component": "date",
+                              "name": "dateRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "date is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "checkNumber",
+                              "name": "checkNumberLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Check Number",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "checkNumber",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${transaction.checkNumber}",
+                              "valueType": "int?"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "category_id",
+                              "name": "category_idLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Category",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "allowFiltering": true,
+                              "data": "${getCategoriesResult}",
+                              "name": "category_id",
+                              "placeholder": "Choose Category",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "textProperty": "name",
+                              "type": "dropdown",
+                              "value": "${transaction.category_id}",
+                              "valueProperty": "category_id",
+                              "valueType": "int"
+                            },
+                            {
+                              "component": "category_id",
+                              "defaultValue": "0",
+                              "name": "category_idRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "category_id is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "payee_id",
+                              "name": "payee_idLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Payee",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "allowFiltering": true,
+                              "data": "${getPayeesResult}",
+                              "name": "payee_id",
+                              "placeholder": "Choose Payee",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "textProperty": "name",
+                              "type": "dropdown",
+                              "value": "${transaction.payee_id}",
+                              "valueProperty": "payee_id",
+                              "valueType": "int"
+                            },
+                            {
+                              "component": "payee_id",
+                              "defaultValue": "0",
+                              "name": "payee_idRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "payee_id is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "description",
+                              "name": "descriptionLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Description",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "maxLength": 150,
+                              "name": "description",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "type": "textbox",
+                              "value": "${transaction.description}",
+                              "valueType": "string"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "amount",
+                              "name": "amountLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Amount",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "amount",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${transaction.amount}",
+                              "valueType": "decimal?"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "status_id",
+                              "name": "status_idLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Status",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getStatusesResult}",
+                              "name": "status_id",
+                              "placeholder": "Choose Status",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "textProperty": "name",
+                              "type": "dropdown",
+                              "value": "${transaction.status_id}",
+                              "valueProperty": "status_id",
+                              "valueType": "int"
+                            },
+                            {
+                              "component": "status_id",
+                              "defaultValue": "0",
+                              "name": "status_idRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "status_id is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "buttonStyle": "primary",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "type": "button"
+                            },
+                            {
+                              "buttonStyle": "light",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              },
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "type": "button"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "data": "${transaction}",
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Transaction!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "sql.createTransaction",
+                        "parameters": [
+                          {
+                            "name": "Transaction",
+                            "value": "${transaction}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "result": "${transaction}",
+                            "type": "close-popup"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "PersonalFinance.Models.Sql.Transaction",
+                  "name": "form0",
+                  "type": "template-form",
+                  "visible": "${transaction != null}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "sql.getAccounts",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getAccountsResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Account>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "sql.getCategories",
+        "parameters": [
+          {
+            "name": "$orderby",
+            "value": [
+              {
+                "direction": "asc",
+                "property": "name"
+              }
+            ]
+          }
+        ],
+        "then": [
+          {
+            "name": "getCategoriesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Category>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "sql.getPayees",
+        "parameters": [
+          {
+            "name": "$orderby",
+            "value": [
+              {
+                "direction": "asc",
+                "property": "name"
+              }
+            ]
+          }
+        ],
+        "then": [
+          {
+            "name": "getPayeesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Payee>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "sql.getStatuses",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getStatusesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<PersonalFinance.Models.Sql.Status>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "transaction",
+        "type": "set",
+        "value": "new PersonalFinance.Models.Sql.Transaction(){}",
+        "valueType": "PersonalFinance.Models.Sql.Transaction"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Add Transaction"
+}

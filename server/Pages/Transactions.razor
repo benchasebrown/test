@@ -1,0 +1,77 @@
+﻿@page "/transactions"
+@layout MainLayout
+@inherits PersonalFinance.Pages.TransactionsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using PersonalFinance.Models.Sql
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Transactions">
+    </RadzenHeading>
+    <RadzenDataGrid @ref="datagrid0" Data="@getBalancesResult" TItem="PersonalFinance.Models.Sql.Balance">
+      <Columns>
+        <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Balance" Property="name" Title="Name">
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Balance" FormatString="{0:C}" Property="balance1" Title="Balance">
+        </RadzenDataGridColumn>
+      </Columns>
+    </RadzenDataGrid>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-bottom: 10px; margin-left: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await Load();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getTransactionsResult" FilterMode="FilterMode.Advanced" TItem="PersonalFinance.Models.Sql.Transaction" PageSize="50" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" Property="transaction_id" Title="Transaction Id" Visible="false">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" FilterProperty="Account.name" GroupProperty="Account.name" Property="account_id" SortProperty="Account.name" Title="Account" Width="100px">
+              <Template Context="data">
+              @(data.Account?.name)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" FormatString="{0:MM/dd/yyyy}" Property="date" Title="Date" Width="100px">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" Property="checkNumber" Title="Check Number" Width="100px">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" FilterProperty="Category.name" GroupProperty="Category.name" Property="category_id" SortProperty="Category.name" Title="Category" Width="250px">
+              <Template Context="data">
+              @(data.Category?.name)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" FilterProperty="Payee.name" GroupProperty="Payee.name" Property="payee_id" SortProperty="Payee.name" Title="Payee" Width="250px">
+              <Template Context="data">
+              @(data.Payee?.name)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" Property="description" Title="Description" Width="400px">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" FormatString="{0:C}" Property="amount" Title="Amount" Width="100px">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" FilterProperty="Status.name" GroupProperty="Status.name" Property="status_id" SortProperty="Status.name" Title="Status" Width="200px">
+              <Template Context="data">
+              @(data.Status?.name)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.Transaction" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+              <Template Context="personalFinanceModelsSqlTransaction">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, personalFinanceModelsSqlTransaction))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

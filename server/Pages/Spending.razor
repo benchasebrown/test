@@ -1,0 +1,27 @@
+﻿@page "/spending"
+@layout MainLayout
+@inherits PersonalFinance.Pages.SpendingComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using PersonalFinance.Models.Sql
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Spending">
+    </RadzenHeading>
+    <RadzenChart ColorScheme="ColorScheme.Pastel" style="height: 345px">
+      <ChildContent>
+        <RadzenDonutSeries CategoryProperty="name" Data="@getSummariesResult" Radius="150" Title="Spending by Category" ValueProperty="total">
+        </RadzenDonutSeries>
+      </ChildContent>
+    </RadzenChart>
+    <RadzenDataGrid @ref="datagrid0" Data="@getSummariesResult" TItem="PersonalFinance.Models.Sql.SummaryCategoriesThisMonth">
+      <Columns>
+        <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SummaryCategoriesThisMonth" Property="name" Title="Name">
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="PersonalFinance.Models.Sql.SummaryCategoriesThisMonth" Property="total" Title="Total">
+        </RadzenDataGridColumn>
+      </Columns>
+    </RadzenDataGrid>
+  </ChildContent>
+</RadzenContent>

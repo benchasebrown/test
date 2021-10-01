@@ -1,0 +1,59 @@
+﻿@inherits PersonalFinance.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using PersonalFinance.Models.Sql
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
+
+<RadzenHeader>
+  <ChildContent>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-6 d-flex align-items-center">
+        <RadzenSidebarToggle Click="@SidebarToggle0Click">
+        </RadzenSidebarToggle>
+        <RadzenLabel Text="PersonalFinance">
+        </RadzenLabel>
+      </div>
+      <div class="col-6 text-right">
+      </div>
+    </div>
+  </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body0">
+  <ChildContent>
+    <RadzenContentContainer Name="main">
+    @Body
+    </RadzenContentContainer>
+  </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar0">
+  <ChildContent>
+    <RadzenPanelMenu style="height: 100%">
+      <ChildContent>
+        <RadzenPanelMenuItem Path="transactions" Text="Transactions">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="budgets" Text="Budgets">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="spending" Text="Spending">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="payees" Text="Payees">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="categories" Text="Categories">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="bills" Text="Bills">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Path="accounts" Text="Accounts">
+        </RadzenPanelMenuItem>
+      </ChildContent>
+    </RadzenPanelMenu>
+  </ChildContent>
+</RadzenSidebar>
+<RadzenFooter>
+  <ChildContent>
+    <RadzenLabel Text="PersonalFinance, Copyright Ⓒ 2021">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenFooter>
