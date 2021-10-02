@@ -40,10 +40,9 @@ steps:
     azureSubscription: 'Azure subscription 1(4c0079cc-5a9e-45a1-b79c-a0dad83b8af2)'
     appType: 'webApp'
     WebAppName: 'bcbpf'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)\PersonalFinance.zip'
 
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
